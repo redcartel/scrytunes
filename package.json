@@ -16,10 +16,10 @@
     "copyright": "Copyright 2019 Carter Adams",
     "productName": "scryTunes",
     "directories": {
-        "buildResources": "assets"
+      "buildResources": "assets"
     },
     "mac": {
-        "category": "public.app-category.utilities"
+      "category": "public.app-category.utilities"
     }
   },
   "scripts": {
@@ -45,9 +45,14 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "dataurl": "^0.1.0",
     "electron-is-dev": "^1.1.0",
+    "electron-json-storage": "^4.1.8",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.8.6",
+    "react-router": "^5.1.1",
+    "react-router-dom": "^5.1.1",
     "react-scripts": "^3.1.2"
   },
   "repository": {
@@ -55,11 +60,11 @@
     "url": "git+ssh://git@github.com:redcartel/scrytunes"
   },
   "keywords": [
-      "react",
-      "create-react-app",
-      "craco",
-      "electron",
-      "electron-builder"
+    "react",
+    "create-react-app",
+    "craco",
+    "electron",
+    "electron-builder"
   ],
   "devDependencies": {
     "@craco/craco": "^5.2.1",

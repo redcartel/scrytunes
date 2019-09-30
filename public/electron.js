@@ -34,6 +34,7 @@ function createWindow() {
   }
 
     // Emitted when the window is closed.
+    mainWindow.setResizable(true)
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
