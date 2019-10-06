@@ -8,6 +8,8 @@ const isDev = require('electron-is-dev')
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+const title = "scryTunes"
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

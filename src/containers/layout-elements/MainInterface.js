@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import TopControls from '../../components/TopControls'
 import MusicList from '../../components/MusicList'
 import Player from '../../components/Player'
-
-import { app } from 'electron'
 import fs from 'fs'
 import dataurl from 'dataurl'
 import storage from 'electron-json-storage'
@@ -47,19 +45,11 @@ const filesDict = (paths) => {
 
 //const makeFile = (path)
 
-const MainInterface = ({rowY, activeProfile})=>{
+const MainInterface = ({profile})=>{
   const [files, updateFiles] = useState([])
   const [songData, updateSongData] = useState('data:')
 
   const playlist = null // should be a prop from above
-
-  //storage.getAll((error, data) => console.log('getAll', error, data))
-
-  /*
-  storage.set('songs', ['ok'], (error, data)=>{
-    console.log('set', error, data)
-  })
-  */
 
   const loadSongs = () => {
     storage.get('songs', (error, data) => {
@@ -76,12 +66,12 @@ const MainInterface = ({rowY, activeProfile})=>{
 
   const addLibraryFiles = (loadedFiles) => {
     storage.get('scryTunes', (error, stData)=>{
-      const newLibrary = stData.profiles[activeProfile]['library'];
+      const newLibrary = stData.profiles[profile]['library'];
       for (let inode in loadedFiles) {
         newLibrary.push(inode)
         console.log(inode)
       }
-      stData.profiles[activeProfile]['library'] = newLibrary
+      stData.profiles[profile]['library'] = newLibrary
       storage.set('scryTunes', stData)
     })
   }
@@ -112,9 +102,9 @@ const MainInterface = ({rowY, activeProfile})=>{
     })
   }
 
-  const playerProps = {songData, activeProfile}
-  const topControlProps = {loadSongs, addSongs, songData, genStorage, logStorage, activeProfile}
-  const musicListProps = {playSong, activeProfile, playlist}
+  const playerProps = {songData, profile}
+  const topControlProps = {loadSongs, addSongs, songData, genStorage, logStorage, profile}
+  const musicListProps = {playSong, playlist, profile}
 
   return (
     <div className="MainInterface" style={{width: '100vw', height: '100vh'}}>

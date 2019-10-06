@@ -1,30 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import isDev from 'electron-is-dev'
 
-const bgColor = isDev ? 'inherit' : 'inherit'
+const bgColor = '#eeeeee'
 
-const LeftColumn = ({bounds, colX}) => {
-  const [style, setStyle] = useState({})
-
-  useEffect(()=>{
-    if (bounds) {
-      setStyle({
-        left: bounds.x,
-        top: bounds.y,
-        width: colX,
-        height: bounds.height
-      })
-    }
-  }, [bounds, colX])
-
+const LeftColumn = ({ children }) => {
   return (
-  <div className="LeftColumn" style={{
-    ...style,
-    backgroundColor: bgColor,
-    position: 'absolute'
-  }}>
-  
-  </div>
+    <div
+      className='LeftColumn'
+      style={{
+        backgroundColor: bgColor,
+        width: 200,
+        float: 'left',
+        height: '100vw'
+      }}
+    >
+      {children}
+    </div>
   )
 }
 

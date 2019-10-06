@@ -1,40 +1,26 @@
 import React, {useEffect, useState} from 'react'
-
 import storage from 'electron-json-storage'
+import log from '../log.js'
 
 const getPaths = (profile, playlist, callback) => {
-  storage.getMany(['scryTunes', 'scryTunesFiles'], (err, data)=>{
-    const files = data.scryTunesFiles
-    const paths = data.scryTunes.profiles[profile]['library'].map(node=>files[node]['path'])
-    callback(paths)
-  })
+  log("MusicList", profile, playlist)
+  if (profile) {
+    const getPlaylist = playlist || 'library'
+    storage.getMany(['scryTunes', 'scryTunesFiles'], (err, data)=>{
+      const files = data.scryTunesFiles
+      const paths = data.scryTunes.profiles[profile][getPlaylist].map(node=>files[node]['path'])
+      callback(paths)
+    })
+  }
 }
 
-export default function MusicList({files, playSong, activeProfile, playlist}) {
+export default function MusicList({files, playSong, profile, playlist}) {
 
   const [paths, setPaths] = useState([]) 
 
   useEffect(()=>{
-    getPaths(activeProfile, null, paths=>{setPaths(paths)})
-  }, [activeProfile])
-
-  /*
-  const songs = [
-    {'title': 'All Together Now', 'artist': 'The Beatles', 'track': 8, 'album': 'Yellow Submarine'},
-    {'title': 'Ceremony', 'artist': 'New Order', 'track': 1, 'album': 'Substance'},
-    {'title': 'Loser', 'artist': 'Bectk', 'track': 6, 'album': 'Mellow Gold'}
-  ]
-  */
-
-  /*
-  const rows = songs.map((tags, i)=>
-  <tr key={i}>
-      <td>{tags.track}</td>
-      <td>{tags.title}</td>
-      <td>{tags.artist}</td>
-      <td>{tags.album}</td>
-    </tr>);
-    */
+    getPaths(profile, playlist, paths=>{setPaths(paths)})
+  }, [profile])
   
   const rows = paths.map((path, i)=>
   <tr key={i} onDoubleClick={(event)=>playSong(path)}>
@@ -54,7 +40,7 @@ export default function MusicList({files, playSong, activeProfile, playlist}) {
 
   return (
     <div className='MusicList' style={{overflow: 'scroll', position: 'relative', bottom: '0px'}}>
-      <table striped bordered hover>
+      <table striped="true" bordered="true" hover="true">
         <thead>
           {header}
         </thead>

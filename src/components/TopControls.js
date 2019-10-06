@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
 
 const { dialog } = require('electron').remote
 
@@ -13,15 +12,6 @@ export default function TopControls ({loadSongs, addSongs, songData, genStorage,
     if (files) {
       addSongs(files)
     }
-
-    /*
-              storage.get('songs', (error, songs) => {
-                const oldSongs = songs.length !== undefined ? songs : []
-                const newSongList = [...oldSongs, ...files]
-                this.setState({fileList: newSongList})
-                storage.set('songs', {songlist:newSongList})
-              })
-              */
   }
 
   return (
