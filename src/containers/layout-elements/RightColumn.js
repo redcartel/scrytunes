@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Player from '../../components/Player'
 import TrackList from '../../components/TrackList'
 import isDev from 'electron-is-dev'
+import MainInterface from './MainInterface'
 
-const bgColor = isDev ? 'blue' : 'white'
+const bgColor = isDev ? 'white' : 'white'
 
-const RightColumn = ({ bounds, colX, setColX }) => {
+const RightColumn = ({ bounds, colX, setColX, activeProfile}) => {
   const [style, setStyle] = useState({})
   const [resizeStyle, setResizeStyle] = useState({})
   const [resizeDiv, setResizeDiv] = useState(null)
@@ -76,8 +77,7 @@ const RightColumn = ({ bounds, colX, setColX }) => {
         position: 'absolute'
       } : {}}
     >
-      <Player bounds={bounds} rowY={100}/>
-      <TrackList bounds={bounds} rowY={100}/>
+      <MainInterface rowY={200} activeProfile={activeProfile}/> 
     </div>
       <div
         className='resizeBorder'

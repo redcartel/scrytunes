@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import isDev from 'electron-is-dev'
 
-const bgColor = isDev ? 'red' : 'inherit'
+const bgColor = isDev ? 'inherit' : 'inherit'
 
 const LeftColumn = ({bounds, colX}) => {
   const [style, setStyle] = useState({})

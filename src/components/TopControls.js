@@ -3,9 +3,7 @@ import { Button } from 'react-bootstrap'
 
 const { dialog } = require('electron').remote
 
-export default function TopControls (props) {
-
-  const { loadSongs, addSongs } = props.funcs
+export default function TopControls ({loadSongs, addSongs, songData, genStorage, logStorage}) {
 
   const loadFilesMenu = event => {
     event.preventDefault()
@@ -31,6 +29,8 @@ export default function TopControls (props) {
       <button onClick={loadFilesMenu}>Load Files</button>
       <button onClick={() => null}>Load Directory</button>
       <button onClick={() => loadSongs()}>Log JSON</button>
+      <button onClick={() => genStorage()}>Regenerate Storage</button>
+      <button onClick={() => logStorage()}>Log Storage</button>
     </div>
   )
 }

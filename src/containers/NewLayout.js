@@ -8,9 +8,10 @@ const maxColX = 300
 const minColX = 100
 const colXRatio = .2
 
-const NewLayout = ({ bounds }) => {
+const NewLayout = ({ bounds, activeProfile, setActiveProfile }) => {
   const [divBounds, setDivBounds] = useState({})
   const [layoutDiv, setLayoutDiv] = useState(null)
+  const [playList, setPlayList] = useState(null) // null playlist = show library
   const [colX, setColX] = useState(null)
 
   const checkBounds = () => {
@@ -52,6 +53,9 @@ const NewLayout = ({ bounds }) => {
 
   const colProps = {bounds: divBounds, colX: colX, setColX: setColX}
 
+  const leftProps = {playList, setPlayList, activeProfile}
+  const rightProps = {playList, activeProfile}
+
   return (
   <div
     className='Layout'
@@ -64,8 +68,8 @@ const NewLayout = ({ bounds }) => {
     overflow: 'hidden'
     }}
     >
-    <LeftColumn {...colProps} />
-    <RightColumn {...colProps} />
+    <LeftColumn {...leftProps} {...colProps} />
+    <RightColumn {...leftProps} {...colProps} />
   </div>
     )
   }

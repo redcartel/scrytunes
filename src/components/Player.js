@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react'
+import TopControls from './TopControls'
 
-const Player = ({rowY, bounds})=>{
+const Player = ({songData, activeProfile})=>{
   return (
-    <div style={rowY ? {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      height: rowY, 
-      width: '100vw'
-    } : {}} >
-    <audio controls />
-  </div>
+    <div className="Player">
+      <div style={{ textAlign: 'center' }}>
+        <h1>ScryTunes Media Player: {activeProfile}</h1>
+        <audio src={songData} controls='yes' id='AudioPlayer' />
+      </div>
+    </div>
   );
 }
 

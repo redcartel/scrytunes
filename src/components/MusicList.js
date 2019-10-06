@@ -1,6 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
-export default function MusicList({songs, playSong}) {
+import storage from 'electron-json-storage'
+
+const getPaths = (profile, playlist, callback) => {
+  storage.getMany(['scryTunes', 'scryTunesFiles'], (err, data)=>{
+    const files = data.scryTunesFiles
+    const paths = data.scryTunes.profiles[profile]['library'].map(node=>files[node]['path'])
+    callback(paths)
+  })
+}
+
+export default function MusicList({files, playSong, activeProfile, playlist}) {
+
+  const [paths, setPaths] = useState([]) 
+
+  useEffect(()=>{
+    getPaths(activeProfile, null, paths=>{setPaths(paths)})
+  }, [activeProfile])
+
   /*
   const songs = [
     {'title': 'All Together Now', 'artist': 'The Beatles', 'track': 8, 'album': 'Yellow Submarine'},
@@ -18,8 +35,8 @@ export default function MusicList({songs, playSong}) {
       <td>{tags.album}</td>
     </tr>);
     */
-
-  const rows = songs.map((path, i)=>
+  
+  const rows = paths.map((path, i)=>
   <tr key={i} onDoubleClick={(event)=>playSong(path)}>
     <td>{i}</td>
     <td>{path}</td>
